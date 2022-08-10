@@ -1,0 +1,423 @@
+{
+   "testaction":[
+      {
+         "type":"baudrate",
+         "parameters": {
+             "target":"main",		 
+             "value":115200
+         },
+         "comment":"Default-Baudrate for FW-Flashing is 115200."
+      },
+      {
+         "type":"interface",
+         "parameters": {
+             "target":"main",
+             "value":"RS485"
+         },
+         "comment":"none"
+      },
+      {
+         "type":"rotation",
+         "parameters": {
+             "value":"CW"
+         },
+         "comment":"With this FW default rotation is CW"
+      },	  
+      {
+         "type":"resistance",
+         "parameters": {		 
+         "path":"a to gnd"
+         },
+         "limits": {
+             "min":12000,
+             "max":14000
+         },
+         "limit unit":"ohm",
+         "result unit":"ohm",
+         "comment":"In Absprache mit R.C. max auf 14k geändert."
+      },
+      {
+         "type":"resistance",
+         "path":"b to gnd",
+         "limit min":12000,
+         "limit max":14000,
+         "limit unit":"ohm",
+         "result unit":"ohm"
+      },
+      {
+         "type":"resistance",
+         "path":"power to gnd",
+         "limit min":1000000,
+         "limit max":10000000,
+         "limit unit":"ohm",
+         "result unit":"ohm"
+      },
+      {
+         "type":"resistance",
+         "path":"gnd to case",
+         "limit min":1000000,
+         "limit max":990000000,
+         "limit unit":"ohm",
+         "result unit":"ohm"
+      },
+      {
+         "type":"power supply voltage",
+         "action":"set",
+         "source":"actuator primary",
+         "limit power supply min":11.9,
+         "limit power supply max":12.1,
+         "limit unit":"V"
+      },
+      {
+         "type":"power supply voltage",
+         "action":"verify",
+         "source":"actuator primary",
+         "limit power supply min":11.9,
+         "limit power supply max":12.1,
+         "limit unit":"V"
+      },
+      {
+         "type":"write firmware",
+         "target":"main left",
+         "URL":"\\\\VSD-Server\\00 Firmware\\DA15\test.hex",
+         "verify":true,
+         "powerUp before":true,
+         "powerDown after":true
+      },
+      {
+         "type":"write firmware",
+         "target":"main right",
+         "URL":"\\\\VSD-SERVER-1\\Produktion\\00 Freigabe\\Firmware\\DA15-N\\RS485\\v1.4\\Volz_B115_rev156\\DA15A_115k.hex",
+         "verify":true,
+         "powerUp before":true,
+         "powerDown after":true
+      },
+      {
+         "type":"baudrate",
+         "target":"main",		 
+         "value":57600,
+         "comment":"After Firmware-flash default baudrate is 57600"
+      },	  
+      {
+         "type":"read pcb serial",
+         "source":[
+            "main left",
+            "main right",
+            "sensor upside",
+            "sensor downside"
+         ],
+         "powerUp before":true,
+         "powerDown after":false		 
+      },
+      {
+         "type":"set position zero"
+      },
+      {
+         "type":"environmental stress screening temperature",
+         "temperature low duration":15,
+         "temperature low temp":-35,
+         "temperature low sequence":1,
+         "temperature high duration":15,
+         "temperature high temp":80,
+         "temperature high sequence":2
+      },
+      {
+         "type":"environmental stress screening vibration",
+         "vibration Duration":60,
+         "vibration Frequency":30,
+         "vibration Acceleration":2.5,
+         "vibration Sequence":3
+      },
+      {
+         "type":"environmental stress screening run-in",
+         "run-in duration":20,
+         "run-in torque":0.033,
+         "run-in duty cycle":58,
+         "run-in sequence":4
+      },
+      {
+         "type":"power supply voltage",
+         "action":"set",
+         "source":"actuator secondary",
+         "limit power supply min":11.9,
+         "limit power supply max":12.1,
+         "limit unit":"V"
+      },
+      {
+         "type":"power supply voltage",
+         "action":"verify",
+         "source":"actuator secondary",
+         "limit power supply min":11.9,
+         "limit power supply max":12.1,
+         "limit unit":"V"
+      },
+      {
+         "type":"power supply voltage",
+         "action":"set",
+         "source":"load",
+         "limit power supply min":39.9,
+         "limit power supply max":41.1,
+         "limit unit":"V"
+      },
+      {
+         "type":"power supply voltage",
+         "action":"verify",
+         "source":"load",
+         "limit power supply min":39.9,
+         "limit power supply max":41.1,
+         "limit unit":"V"
+      },
+      {
+         "type":"write eeprom",
+         "start address":"0x130",
+         "content":[
+            "D",
+            "A",
+            " ",
+            "1",
+            "5",
+            "-",
+            "N",
+            "-",
+            "C",
+            "C",
+            "0",
+            "6",
+            ".",
+            "1",
+            "2",
+            ".",
+            "B",
+            "L",
+            "D",
+            "C",
+            ".",
+            "R"
+         ],
+         "powerUp before":true,
+         "powerDown after":true		 
+      },
+      {
+         "type":"write eeprom",
+         "start address":"0x20",
+         "content":[
+            "0x1E",
+            "0x3C",
+            "0x28",
+            "0x00",
+            "0xFF",
+            "0xFF",
+            "0x01",
+            "0x39",
+            "0x00",
+            "0xFF",
+            "0xFF",
+            "0x06",
+            "0x00",
+            "0x06",
+            "0x20",
+            "0x4E",
+            "0x01",
+            "0xFF",
+            "0x00",
+            "0x00",
+            "0xFF",
+            "0x00",
+            "0x00",
+            "0x00"
+         ],
+         "powerUp before":true,
+         "powerDown after":true		 
+      },
+      {
+         "type":"temp servo internal",
+         "limit min":23.0,
+         "limit max":35.0,
+         "limit unit":"°C",
+         "powerUp before":true,
+         "powerDown after":false		 
+      },
+      {
+         "type":"current servo internal",
+         "limit min":0.02,
+         "limit max":0.1,
+         "limit unit":"A",
+         "powerUp before":false,
+         "powerDown after":false		 
+      },
+      {
+         "type":"voltage servo internal",
+         "limit min":11.9,
+         "limit max":12.1,
+         "limit unit":"V",
+         "powerUp before":false,
+         "powerDown after":false
+      },
+      {
+         "type":"set position zero"
+      },
+      {
+         "type":"continuous movement",
+         "time":2,
+         "time unit":"min",
+         "direction":"CW",
+         "torque":1.0,
+         "torque unit":"Ncm",
+         "powerUp before":false,
+         "powerDown after":false
+      },
+      {
+         "type":"continuous movement",
+         "time":2,
+         "time unit":"min",
+         "direction":"CCW",
+         "torque":1.0,
+         "torque unit":"Ncm",
+         "powerUp before":false,
+         "powerDown after":false
+      },
+      {
+         "type":"gear train stress test",
+         "start pos":-45,
+         "impact pos":0,
+         "end pos":45,
+         "torque":10,
+         "time":300,
+         "time unit":"ms",
+         "repetitions":4,
+         "static torque":10,
+         "limit min":0.0,
+         "limit max":5.0,
+         "powerUp before":false,
+         "powerDown after":false
+      },
+      {
+         "type":"velocity",
+         "start pos":-45.0,
+         "end pos":45.0,
+         "point1":-25.0,
+         "point2":25.0,
+         "parameter unit":"angle degree",
+         "torque":0.0,
+         "torque unit":"Ncm",
+         "limit min":280.0,
+         "limit max":360.0,
+         "limit unit":"°/s",
+         "powerUp before":false,
+         "powerDown after":false
+      },
+      {
+         "type":"velocity",
+         "start pos":45.0,
+         "end pos":-45.0,
+         "point1":25.0,
+         "point2":-25.0,
+         "parameter unit":"angle degree",
+         "torque":0.0,
+         "torque unit":"Ncm",
+         "limit min":280.0,
+         "limit max":360.0,
+         "limit unit":"°/s"
+      },
+      {
+         "type":"current",
+         "start pos":45.0,
+         "end pos":-45.0,
+         "idle pos 1":20.0,
+         "idle pos 2":-20.0,
+         "parameter unit":"angle degree",
+         "counter torque":0.0,
+         "counter torque unit":"Ncm",
+         "limit peak min":0.8,
+         "limit peak max":1.1,
+         "limit idle min":0.1,
+         "limit idle max":0.5,
+         "limit standby1 min":0.00,
+         "limit standby1 max":0.05,
+         "limit standby2 min":0.00,
+         "limit standby2 max":0.05,
+         "limit unit":"A"
+      },
+      {
+         "type":"current",
+         "start pos":-45.0,
+         "end pos":45.0,
+         "idle pos 1":-20.0,
+         "idle pos 2":20.0,
+         "parameter unit":"angle degree",
+         "counter torque":0.0,
+         "counter torque unit":"Ncm",
+         "limit peak min":0.8,
+         "limit peak max":1.1,
+         "limit idle min":0.1,
+         "limit idle max":0.5,
+         "limit standby1 min":0.00,
+         "limit standby1 max":0.05,
+         "limit standby2 min":0.00,
+         "limit standby2 max":0.05,
+         "limit unit":"A"
+      },
+      {
+         "type":"current",
+         "start pos":-45.0,
+         "end pos":45.0,
+         "idle pos 1":-20.0,
+         "idle pos 2":20.0,
+         "parameter unit":"angle degree",
+         "counter torque":40.0,
+         "counter torque unit":"Ncm",
+         "limit peak min":1.5,
+         "limit peak max":4.5,
+         "limit idle min":0.5,
+         "limit idle max":0.7,
+         "limit standby1 min":0.00,
+         "limit standby1 max":0.05,
+         "limit standby2 min":0.00,
+         "limit standby2 max":0.05,
+         "limit unit":"A",
+         "comment":"Wurde von R.C. eingeführt."
+      },
+      {
+         "type":"current spike",
+         "limit min":1.0,
+         "limit max":13.0,
+         "limit unit":"A"
+      },
+      {
+         "type":"linearity",
+         "start pos":-5.0,
+         "end pos":5.0,
+         "parameter unit":"angle degree",
+         "increment":0.5,
+         "increment unit":"unitless",
+         "counter torque":0.0,
+         "counter torque unit":"Ncm",
+         "limit min servo ext":-3.0,
+         "limit max servo ext":3.0,
+         "limit min setpos ext":-3.0,
+         "limit max setpos ext":3.0,
+         "limit unit":"angle degree"
+      },
+      {
+         "type":"linearity",
+         "start pos":5.0,
+         "end pos":-5.0,
+         "parameter unit":"angle degree",
+         "increment":0.5,
+         "increment unit":"unitless",
+         "counter torque":0.0,
+         "counter torque unit":"Ncm",
+         "limit min servo ext":-3.0,
+         "limit max servo ext":3.0,
+         "limit min setpos ext":-3.0,
+         "limit max setpos ext":3.0,
+         "limit unit":"angle degree"
+      },
+      {
+         "type":"write firmware",
+         "target":"main left",
+         "URL":"//10.10.42.1/URL/OAuth=78sdg72otge2hv09348uf3gru&servo=da15n&fw=1.5.3",
+         "verify":true
+      }
+   ]
+}
