@@ -3,7 +3,7 @@
       {
          "type":"baudrate",
          "parameters": {
-             "target":"main",		 
+             "target":"main",
              "value":115200
          },
          "comment":"Default-Baudrate for FW-Flashing is 115200."
@@ -22,11 +22,11 @@
              "value":"CW"
          },
          "comment":"With this FW default rotation is CW"
-      },	  
+      },
       {
          "type":"resistance",
-         "parameters": {		 
-         "path":"a to gnd"
+         "parameters": {
+            "path":"a to gnd"
          },
          "limits": {
              "min":12000,
@@ -38,15 +38,21 @@
       },
       {
          "type":"resistance",
-         "path":"b to gnd",
-         "limit min":12000,
-         "limit max":14000,
+         "parameters": {
+            "path":"b to gnd"
+         },
+         "limits": {
+            "min":12000,
+            "max":14000
+         },
          "limit unit":"ohm",
          "result unit":"ohm"
       },
       {
          "type":"resistance",
-         "path":"power to gnd",
+         "parameters": {
+            "path":"power to gnd"
+         },
          "limit min":1000000,
          "limit max":10000000,
          "limit unit":"ohm",
@@ -54,7 +60,9 @@
       },
       {
          "type":"resistance",
-         "path":"gnd to case",
+         "parameters": {
+            "path":"gnd to case"
+         },
          "limit min":1000000,
          "limit max":990000000,
          "limit unit":"ohm",
@@ -94,10 +102,12 @@
       },
       {
          "type":"baudrate",
-         "target":"main",		 
-         "value":57600,
+         "parameters": {
+            "target":"main",
+            "value":57600
+         },
          "comment":"After Firmware-flash default baudrate is 57600"
-      },	  
+      },
       {
          "type":"read pcb serial",
          "source":[
@@ -107,7 +117,7 @@
             "sensor downside"
          ],
          "powerUp before":true,
-         "powerDown after":false		 
+         "powerDown after":false
       },
       {
          "type":"set position zero"
@@ -195,7 +205,7 @@
             "R"
          ],
          "powerUp before":true,
-         "powerDown after":true		 
+         "powerDown after":true
       },
       {
          "type":"write eeprom",
@@ -227,7 +237,7 @@
             "0x00"
          ],
          "powerUp before":true,
-         "powerDown after":true		 
+         "powerDown after":true
       },
       {
          "type":"temp servo internal",
@@ -235,7 +245,7 @@
          "limit max":35.0,
          "limit unit":"°C",
          "powerUp before":true,
-         "powerDown after":false		 
+         "powerDown after":false
       },
       {
          "type":"current servo internal",
@@ -243,7 +253,7 @@
          "limit max":0.1,
          "limit unit":"A",
          "powerUp before":false,
-         "powerDown after":false		 
+         "powerDown after":false
       },
       {
          "type":"voltage servo internal",
@@ -293,15 +303,19 @@
       },
       {
          "type":"velocity",
-         "start pos":-45.0,
-         "end pos":45.0,
-         "point1":-25.0,
-         "point2":25.0,
+         "parameters":{
+            "start pos":-45.0,
+            "end pos":45.0,
+            "point1":-25.0,
+            "point2":25.0,
+            "torque":0.0
+         },
          "parameter unit":"angle degree",
-         "torque":0.0,
          "torque unit":"Ncm",
-         "limit min":280.0,
-         "limit max":360.0,
+         "limits":{
+            "min":280.0,
+            "max":360.0
+         },
          "limit unit":"°/s",
          "powerUp before":false,
          "powerDown after":false
@@ -417,6 +431,12 @@
          "type":"write firmware",
          "target":"main left",
          "URL":"//10.10.42.1/URL/OAuth=78sdg72otge2hv09348uf3gru&servo=da15n&fw=1.5.3",
+         "verify":true
+      },
+      {
+         "type":"write firmware",
+         "target":"main left",
+         "URL":"http://192.168.199.215:8082/artifactory/playground_local/FW/da58_fw_main/build/output/DA-58-D.hex",
          "verify":true
       }
    ]
