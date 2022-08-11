@@ -9,10 +9,12 @@ class Resistance : public ITestAction
 {
     public:
         // Constructor
-        Resistance()
-        {
-            m_name = "Resistance";
-        }
+        Resistance() :  m_name("Resistance"),
+                        m_path(""),
+                        m_limit_min(0.0),
+                        m_limit_max(0.0),
+                        m_value(0.0)
+                        {}
 
         // Getter
         unsigned long long getID(){ return m_id; }

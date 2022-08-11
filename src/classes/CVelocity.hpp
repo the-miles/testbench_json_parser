@@ -7,10 +7,13 @@ namespace volz
     class Velocity : public ITestAction
     {
         public:
-            Velocity()
-            {
-                m_name = "Velocity";
-            }
+            Velocity() :    m_name("Velocity"),
+                            m_start_pos(0.0),
+                            m_end_pos(0.0),
+                            m_limit_min(0.0),
+                            m_limit_max(0.0),
+                            m_value(0.0)
+                            {}
 
             // Getter
             unsigned long long getID(){ return m_id; }

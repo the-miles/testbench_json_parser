@@ -66,8 +66,6 @@ void parse_velocity(nlohmann::json j, unsigned int seq)
     {
         std::cout << e.what() << '\n';
     }
-
-    tmp.printDetails();
 }
 
 int main()
@@ -159,4 +157,6 @@ int main()
 
     // j.at("first").get_to(name.first);
     //std::cout << data.dump(4) << std::endl;
+
+
 }
