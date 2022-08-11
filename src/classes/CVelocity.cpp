@@ -5,6 +5,7 @@
 void volz::Velocity::printDetails()
 {
     std::cout << "Print Velocity Details" << std::endl;
+    std::cout << "Sequence: " << getSequence() << std::endl;
     std::cout << getType() << std::endl;
     std::cout << getStartPos() << std::endl;
     std::cout << getEndPos() << std::endl;

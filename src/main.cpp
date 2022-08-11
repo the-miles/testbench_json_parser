@@ -14,6 +14,7 @@ void parse_velocity(nlohmann::json j, unsigned int seq)
     volz::Velocity tmp;
     try
     {
+        tmp.setSequence(seq);
         tmp.setType(j["type"]);
         tmp.setStartPos(j["parameters"]["start pos"]);
         tmp.setEndPos(j["parameters"]["end pos"]);
@@ -30,16 +31,6 @@ void parse_velocity(nlohmann::json j, unsigned int seq)
 
 int main()
 {
-    std::vector<std::string> msg{"Hello", "C++", "JSON", "World", "from", "VS Code", "and the C++ extension!"};
-
-    for (const std::string &word : msg)
-    {
-        std::cout << word << " ";
-    }
-    std::cout << std::endl;
-
-    //nlohmann::json jsonData = nlohmann::json::parse(your_json);
-
     std::ifstream f("testaction.json");
     nlohmann::json data = nlohmann::json::parse(f);
 

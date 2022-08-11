@@ -322,15 +322,19 @@
       },
       {
          "type":"velocity",
-         "start pos":45.0,
-         "end pos":-45.0,
-         "point1":25.0,
-         "point2":-25.0,
+         "parameters":{
+            "start pos":45.0,
+            "end pos":-45.0,
+            "point1":25.0,
+            "point2":-25.0,
+            "torque":0.0
+         },
          "parameter unit":"angle degree",
-         "torque":0.0,
          "torque unit":"Ncm",
-         "limit min":280.0,
-         "limit max":360.0,
+         "limits":{
+            "min":280.0,
+            "max":360.0
+         },
          "limit unit":"°/s"
       },
       {
