@@ -1,9 +1,11 @@
-all: CVelocity.o
-	g++ src/main.cpp CVelocity.o -Iinclude/ -Isrc/classes/ -o main
+all: CVelocity.o CResistance.o
+	g++ src/main.cpp CVelocity.o CResistance.o -Iinclude/ -Isrc/classes/ -o main -Wall
 
 CVelocity.o:
-	g++ src/classes/CVelocity.cpp -Isrc/classes/ -c
+	g++ src/classes/CVelocity.cpp -Isrc/classes/ -c -Wall
 
+CResistance.o:
+	g++ src/classes/CResistance.cpp -Isrc/classes/ -c -Wall
 execute:
 	./main
 
