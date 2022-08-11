@@ -24,7 +24,8 @@ void parse_resistance(nlohmann::json j, unsigned int seq)
         tmp.setPath(j["parameters"]["path"]);
         tmp.setLimitMin(j["limits"]["min"]);
         tmp.setLimitMax(j["limits"]["max"]);
-        tmp.setComment(j["comment"]);
+        if(!j["comment"].is_null())
+            tmp.setComment(j["comment"]);
     }
     catch (nlohmann::json::exception& e)
     {
