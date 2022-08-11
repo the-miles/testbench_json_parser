@@ -6,7 +6,6 @@
 #include <json.hpp>
 #include <CVelocity.hpp>
 #include <CResistance.hpp>
-//using json = nlohmann::json;
 
 std::vector<volz::Velocity> velocity;
 
@@ -21,9 +20,39 @@ void parse_resistance(nlohmann::json j, unsigned int seq)
     {
         tmp.setSequence(seq);
         tmp.setType(j["type"]);
-        tmp.setPath(j["parameters"]["path"]);
-        tmp.setLimitMin(j["limits"]["min"]);
-        tmp.setLimitMax(j["limits"]["max"]);
+
+        if(!j["parameters"]["path"].is_null())
+        {
+            tmp.setPath(j["parameters"]["path"]);
+        }
+        else
+        {
+            std::cerr << "Path is missing!" << std::endl;
+        }
+
+        if(j["limits"].is_null())
+        {
+            std::cerr << "Limits Object is missing!" << std::endl;
+        }
+
+        if(!j["limits"]["min"].is_null())
+        {
+            tmp.setLimitMin(j["limits"]["min"]);
+        }
+        else
+        {
+            std::cerr << "Limit Minimum is missing!" << std::endl;
+        }
+
+        if(!j["limits"]["max"].is_null())
+        {
+            tmp.setLimitMax(j["limits"]["max"]);
+        }
+        else
+        {
+            std::cerr << "Limit Maximum is missing!" << std::endl;
+        }
+
         if(!j["comment"].is_null())
             tmp.setComment(j["comment"]);
     }
