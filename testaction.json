@@ -53,8 +53,10 @@
          "parameters": {
             "path":"power to gnd"
          },
-         "limit min":1000000,
-         "limit max":10000000,
+         "limits": {
+            "min":1000000,
+            "max":10000000
+         },
          "limit unit":"ohm",
          "result unit":"ohm"
       },
@@ -63,8 +65,10 @@
          "parameters": {
             "path":"gnd to case"
          },
-         "limit min":1000000,
-         "limit max":990000000,
+         "limits": {
+            "min":1000000,
+            "max":990000000
+         },
          "limit unit":"ohm",
          "result unit":"ohm"
       },

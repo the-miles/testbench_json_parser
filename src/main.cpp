@@ -6,8 +6,12 @@
 #include <json.hpp>
 #include <CVelocity.hpp>
 #include <CResistance.hpp>
+#include <CBaudrate.hpp>
 
-std::vector<volz::Velocity> velocity;
+std::vector<volz::Velocity> velocityVector;
+
+
+/******************************************************************************/
 
 void parse_resistance(nlohmann::json j, unsigned int seq)
 {
@@ -60,9 +64,52 @@ void parse_resistance(nlohmann::json j, unsigned int seq)
     {
         std::cout << e.what() << '\n';
     }
-
 };
-void parse_baudrate(nlohmann::json j, unsigned int seq){};
+
+/******************************************************************************/
+
+void parse_baudrate(nlohmann::json j, unsigned int seq)
+{
+    //std::cout << j.dump(4) << std::endl;
+    std::cout << j.size() << std::endl;
+
+    volz::Baudrate tmp;
+    tmp.setSequence(seq);
+
+    try
+    {
+        tmp.setType(j["type"]);
+
+        if(!j["parameters"]["target"].is_null())
+        {
+            tmp.setTarget(j["parameters"]["target"]);
+        }
+        else
+        {
+            std::cerr << "Target is missing!" << std::endl;
+        }
+
+        if(!j["parameters"]["value"].is_null())
+        {
+            tmp.setValue(j["parameters"]["value"]);
+        }
+        else
+        {
+            std::cerr << "Value is missing!" << std::endl;
+        }
+
+        if(!j["comment"].is_null())
+            tmp.setComment(j["comment"]);
+    }
+    catch (nlohmann::json::exception& e)
+    {
+        std::cout << e.what() << '\n';
+    }
+};
+
+/******************************************************************************/
+
+
 void parse_write_firmware(nlohmann::json j, unsigned int seq){};
 void parse_power_supply_voltage(nlohmann::json j, unsigned int seq){};
 void parse_read_pcb_serial(nlohmann::json j, unsigned int seq){};
@@ -96,7 +143,11 @@ void parse_velocity(nlohmann::json j, unsigned int seq)
     {
         std::cout << e.what() << '\n';
     }
+
+    velocityVector.push_back(tmp);
 }
+
+/******************************************************************************/
 
 int main()
 {
@@ -187,6 +238,8 @@ int main()
 
     // j.at("first").get_to(name.first);
     //std::cout << data.dump(4) << std::endl;
+
+    velocityVector[0].printDetails();
 
 
 }
